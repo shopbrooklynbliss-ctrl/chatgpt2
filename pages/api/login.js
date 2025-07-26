@@ -3,7 +3,7 @@
 export default function handler(req, res) {
   const clientId = process.env.TIKTOK_CLIENT_KEY;
   const redirectUri = encodeURIComponent(process.env.TIKTOK_REDIRECT_URI);
-  const state = 'autotok_state'; // You can generate a random state string if needed
+  const state = Math.random().toString(36).substring(2, 15); // optional: random state
   const scope = 'user.info.basic';
 
   const authUrl = `https://www.tiktok.com/v2/auth/authorize/` +
@@ -15,4 +15,3 @@ export default function handler(req, res) {
 
   res.redirect(authUrl);
 }
-
