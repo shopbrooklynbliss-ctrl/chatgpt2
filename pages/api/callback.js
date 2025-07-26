@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       body: new URLSearchParams({
         client_key: process.env.TIKTOK_CLIENT_KEY,
         client_secret: process.env.TIKTOK_CLIENT_SECRET,
-        code: code,
+        code,
         grant_type: 'authorization_code',
         redirect_uri: process.env.TIKTOK_REDIRECT_URI,
       }),
@@ -29,8 +29,9 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: data.error, message: data.description });
     }
 
-    // For testing purposes, we can just return the token data
+    // ✅ Return token response (includes access_token, etc.)
     return res.status(200).json(data);
+
   } catch (error) {
     return res.status(500).json({ error: 'Internal Server Error', detail: error.message });
   }
